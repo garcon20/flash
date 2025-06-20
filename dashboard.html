@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - CryptoFlash</title>
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2c3e50">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-left">
+                <img src="assets/images/af076c23b2e5bf6e7d676f8ad8be3110.jpg" alt="CryptoFlash" width="40" height="40">
+                <h1>CryptoFlash</h1>
+            </div>
+            <div class="header-right">
+                <div class="user-profile">
+                    <span class="username">Shadrack Arhin</span>
+                    <img src="assets/images/b33dda1ac49df7ba072109e91ca304b8.jpg" alt="User" width="36" height="36">
+                </div>
+                <button id="logoutBtn" class="btn btn-outline btn-sm">Logout</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Balance Overview -->
+            <section class="balance-overview">
+                <h2>Your Portfolio</h2>
+                <div class="balance-cards">
+                    <div class="balance-card">
+                        <div class="crypto-info">
+                            <img src="assets/images/8ba86ebd0f990d16e3d30eabbc65d114.jpg" alt="Bitcoin" width="24" height="24">
+                            <span>Bitcoin</span>
+                        </div>
+                        <div class="balance-amount">
+                            <span class="amount">0.054321</span>
+                            <span class="currency">BTC</span>
+                        </div>
+                        <div class="balance-value">
+                            <span class="value">$1,832.45</span>
+                            <span class="change positive">+2.3%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="balance-card">
+                        <div class="crypto-info">
+                            <img src="assets/images/f4cd4d611a7032ec6debf8ffb2dd78e5.jpg" alt="Ethereum" width="24" height="24">
+                            <span>Ethereum</span>
+                        </div>
+                        <div class="balance-amount">
+                            <span class="amount">1.234567</span>
+                            <span class="currency">ETH</span>
+                        </div>
+                        <div class="balance-value">
+                            <span class="value">$2,345.67</span>
+                            <span class="change negative">-1.2%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="balance-card">
+                        <div class="crypto-info">
+                            <img src="assets/images/c44b0a52b3c760a9934b4c47d13152c9.jpg" alt="Tether" width="24" height="24">
+                            <span>Tether</span>
+                        </div>
+                        <div class="balance-amount">
+                            <span class="amount">1250.50</span>
+                            <span class="currency">USDT</span>
+                        </div>
+                        <div class="balance-value">
+                            <span class="value">$1,250.50</span>
+                            <span class="change neutral">0.0%</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Transaction Buttons -->
+            <section class="transaction-buttons">
+                <button id="depositBtn" class="btn btn-primary">
+                    <i class="fas fa-arrow-down"></i> Deposit
+                </button>
+                <button id="withdrawBtn" class="btn btn-outline">
+                    <i class="fas fa-arrow-up"></i> Withdraw
+                </button>
+            </section>
+
+            <!-- Recent Transactions -->
+            <section class="recent-transactions">
+                <h2>Recent Transactions</h2>
+                <div class="transactions-list">
+                    <div class="empty-state">
+                        <i class="fas fa-exchange-alt"></i>
+                        <p>No transactions yet</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Transaction Modals -->
+        <div id="transactionModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2 id="modalTitle">Deposit Crypto</h2>
+                
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="deposit">Deposit</button>
+                    <button class="tab-btn" data-tab="withdraw">Withdraw</button>
+                </div>
+                
+                <form id="transactionForm" class="transaction-form">
+                    <div class="form-group">
+                        <label for="currency">Currency</label>
+                        <div class="currency-selector">
+                            <select id="currency" name="currency" required>
+                                <option value="BTC">Bitcoin (BTC)</option>
+                                <option value="ETH">Ethereum (ETH)</option>
+                                <option value="USDT">Tether (USDT)</option>
+                            </select>
+                            <div class="current-balance">
+                                Balance: <span id="currentBalance">0.000000</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="amount" id="amountLabel">Amount to Deposit</label>
+                        <div class="amount-input">
+                            <input type="number" id="amount" name="amount" step="0.000001" min="0" placeholder="0.00" required>
+                            <span id="currencySymbol">BTC</span>
+                        </div>
+                        <div class="amount-options">
+                            <button type="button" class="amount-option" data-percent="25">25%</button>
+                            <button type="button" class="amount-option" data-percent="50">50%</button>
+                            <button type="button" class="amount-option" data-percent="75">75%</button>
+                            <button type="button" class="amount-option" data-percent="100">100%</button>
+                        </div>
+                    </div>
+                    
+                    <div id="depositSection">
+                        <div class="form-group">
+                            <label>Deposit Address</label>
+                            <div class="address-display">
+                                <span id="depositAddress">1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa</span>
+                                <button type="button" id="copyAddress" class="btn-icon">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="qr-code-container">
+                            <div class="qr-code">
+                                <img src="assets/images/image.png" alt="QR Code" id="qrCode">
+                            </div>
+                            <p class="qr-note">Scan this QR code to deposit</p>
+                        </div>
+                    </div>
+                    
+                    <div id="withdrawSection" style="display: none;">
+                        <div class="form-group">
+                            <label for="withdrawAddress">Destination Address</label>
+                            <input type="text" id="withdrawAddress" name="withdrawAddress" placeholder="Enter wallet address" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="network">Network</label>
+                            <select id="network" name="network" required>
+                                <option value="BTC">Bitcoin Network</option>
+                                <option value="ETH">Ethereum Network</option>
+                                <option value="TRC20">TRC20 Network</option>
+                            </select>
+                        </div>
+                        
+                        <div class="fee-display">
+                            <span>Network Fee:</span>
+                            <span id="networkFee">0.0005 BTC</span>
+                        </div>
+                        
+                        <div class="receive-display">
+                            <span>You will receive:</span>
+                            <span id="receiveAmount">0.0000 BTC</span>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" id="submitBtn" class="btn btn-primary btn-block">
+                        <span class="btn-text">Proceed to Deposit</span>
+                        <span class="btn-loader" hidden>
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Notification System -->
+        <div id="notification" class="notification">
+            <div class="notification-content">
+                <span id="notificationMessage"></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - CryptoFlash</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-page admin-dashboard">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../assets/images/logo.png" alt="CryptoFlash" width="40" height="40">
+                <span>CryptoFlash</span>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active">
+                        <a href="admin.html">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="users.html">
+                            <i class="fas fa-users"></i>
+                            <span>Users</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="transactions.html">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Transactions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="adminLogoutBtn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Admin Dashboard</h1>
+                <div class="user-profile">
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">5</span>
+                    </div>
+                    <div class="user-info">
+                        <span>Admin User</span>
+                        <div class="avatar">AU</div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content">
+                <!-- Stats Cards -->
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Total Users</h3>
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="card-body">
+                            <h2 id="totalUsers">0</h2>
+                            <p><span class="text-success">+0</span> this week</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Active Deposits</h3>
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        <div class="card-body">
+                            <h2 id="totalDeposits">$0.00</h2>
+                            <p><span class="text-success">+0%</span> from last week</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Pending Withdrawals</h3>
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                        <div class="card-body">
+                            <h2 id="pendingWithdrawals">$0.00</h2>
+                            <p><span class="text-danger">+0</span> requests</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Recent Activity</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>User</th>
+                                        <th>Activity</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminActivityTable">
+                                    <tr>
+                                        <td colspan="6" class="text-center">No recent activity</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+<div class="admin-dashboard">
+  <h2>User Login Activity</h2>
+  <div class="controls">
+    <input type="text" id="user-search" placeholder="Search users...">
+    <button id="refresh-users">Refresh</button>
+  </div>
+  <table id="users-table">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Last Login</th>
+        <th>IP Address</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Filled by JavaScript -->
+    </tbody>
+  </table>
+  
+  <div id="user-detail-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Login History for <span id="detail-username"></span></h3>
+      <div id="login-history-container"></div>
+    </div>
+  </div>
+</div>
+    <script src="admin.js"></script>
+</body>
+</html>

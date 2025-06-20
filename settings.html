@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - CryptoFlash</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2c3e50">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="assets/images/logo.png" alt="CryptoFlash" width="40" height="40">
+                <span>CryptoFlash</span>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="dashboard.html">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="transactions.html">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Transactions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-wallet"></i>
+                            <span>Wallet</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Investments</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="settings.html">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Account Settings</h1>
+                <div class="user-profile">
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="user-info">
+                        <span id="userName">Loading...</span>
+                        <div class="avatar" id="userAvatar">?</div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content">
+                <div class="settings-tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-tab="profile">Profile</button>
+                        <button class="tab-btn" data-tab="security">Security</button>
+                        <button class="tab-btn" data-tab="notifications">Notifications</button>
+                        <button class="tab-btn" data-tab="preferences">Preferences</button>
+                    </div>
+                    
+                    <div class="tab-content active" id="profile-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Profile Information</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="profileForm">
+                                    <div class="form-group">
+                                        <label for="profileName">Full Name</label>
+                                        <input type="text" id="profileName" name="profileName" placeholder="Enter your full name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="profileEmail">Email Address</label>
+                                        <input type="email" id="profileEmail" name="profileEmail" placeholder="Enter your email" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="profilePhone">Phone Number</label>
+                                        <input type="tel" id="profilePhone" name="profilePhone" placeholder="Enter your phone number">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="profileCountry">Country</label>
+                                        <select id="profileCountry" name="profileCountry">
+                                            <option value="">Select country</option>
+                                            <option value="US">United States</option>
+                                            <option value="UK">United Kingdom</option>
+                                            <option value="CA">Canada</option>
+                                            <!-- More countries would be added here -->
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="security-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Security Settings</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="security-item">
+                                    <div class="security-info">
+                                        <h4>Password</h4>
+                                        <p>Last changed: <span id="lastPasswordChange">3 months ago</span></p>
+                                    </div>
+                                    <button class="btn btn-outline" id="changePasswordBtn">Change Password</button>
+                                </div>
+                                
+                                <div class="security-item">
+                                    <div class="security-info">
+                                        <h4>Two-Factor Authentication</h4>
+                                        <p>Status: <span id="2faStatus" class="text-danger">Disabled</span></p>
+                                    </div>
+                                    <button class="btn btn-outline" id="enable2faBtn">Enable 2FA</button>
+                                </div>
+                                
+                                <div class="security-item">
+                                    <div class="security-info">
+                                        <h4>Active Sessions</h4>
+                                        <p>Current session: <span id="currentSession">This device (Chrome, Windows)</span></p>
+                                    </div>
+                                    <button class="btn btn-outline" id="viewSessionsBtn">View All</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="notifications-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Notification Preferences</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="notificationsForm">
+                                    <h4>Email Notifications</h4>
+                                    <div class="form-group checkbox-group">
+                                        <input type="checkbox" id="emailTransactions" name="emailTransactions" checked>
+                                        <label for="emailTransactions">Transaction alerts</label>
+                                    </div>
+                                    <div class="form-group checkbox-group">
+                                        <input type="checkbox" id="emailMarketing" name="emailMarketing" checked>
+                                        <label for="emailMarketing">Marketing communications</label>
+                                    </div>
+                                    <div class="form-group checkbox-group">
+                                        <input type="checkbox" id="emailSecurity" name="emailSecurity" checked>
+                                        <label for="emailSecurity">Security alerts</label>
+                                    </div>
+                                    
+                                    <h4>Push Notifications</h4>
+                                    <div class="form-group checkbox-group">
+                                        <input type="checkbox" id="pushTransactions" name="pushTransactions" checked>
+                                        <label for="pushTransactions">Transaction alerts</label>
+                                    </div>
+                                    <div class="form-group checkbox-group">
+                                        <input type="checkbox" id="pushPrice" name="pushPrice">
+                                        <label for="pushPrice">Price alerts</label>
+                                    </div>
+                                    <div class="form-group checkbox-group">
+                                        <input type="checkbox" id="pushSecurity" name="pushSecurity" checked>
+                                        <label for="pushSecurity">Security alerts</label>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-primary">Save Preferences</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="preferences-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Application Preferences</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="preferencesForm">
+                                    <div class="form-group">
+                                        <label for="prefTheme">Theme</label>
+                                        <select id="prefTheme" name="prefTheme">
+                                            <option value="light">Light</option>
+                                            <option value="dark">Dark</option>
+                                            <option value="system">System Default</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="prefCurrency">Default Currency</label>
+                                        <select id="prefCurrency" name="prefCurrency">
+                                            <option value="USD">US Dollar (USD)</option>
+                                            <option value="EUR">Euro (EUR)</option>
+                                            <option value="GBP">British Pound (GBP)</option>
+                                            <option value="BTC">Bitcoin (BTC)</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group checkbox-group">
+                                        <input type="checkbox" id="prefBiometrics" name="prefBiometrics">
+                                        <label for="prefBiometrics">Enable biometric authentication</label>
+                                    </div>
+                                    <div class="form-group checkbox-group">
+                                        <input type="checkbox" id="prefWatchlist" name="prefWatchlist" checked>
+                                        <label for="prefWatchlist">Show watchlist on dashboard</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Save Preferences</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div class="modal" id="changePasswordModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Change Password</h2>
+                <span class="close-btn">&times;</span>
+            </div>
+            <form id="changePasswordForm">
+                <div class="form-group">
+                    <label for="currentPassword">Current Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="currentPassword" name="currentPassword" placeholder="Enter current password" required>
+                        <button type="button" class="toggle-password" aria-label="Show password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">New Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="newPassword" name="newPassword" placeholder="Enter new password" required>
+                        <button type="button" class="toggle-password" aria-label="Show password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-meter">
+                            <div class="strength-bar"></div>
+                        </div>
+                        <span class="strength-text">Password strength: weak</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirmNewPassword">Confirm New Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="confirmNewPassword" name="confirmNewPassword" placeholder="Confirm new password" required>
+                        <button type="button" class="toggle-password" aria-label="Show password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Update Password</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

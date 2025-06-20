@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Settings - CryptoFlash</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-page admin-dashboard">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../assets/images/logo.png" alt="CryptoFlash" width="40" height="40">
+                <span>CryptoFlash</span>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="admin.html">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="users.html">
+                            <i class="fas fa-users"></i>
+                            <span>Users</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="transactions.html">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Transactions</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="settings.html">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="adminLogoutBtn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Admin Settings</h1>
+                <div class="user-profile">
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">5</span>
+                    </div>
+                    <div class="user-info">
+                        <span>Admin User</span>
+                        <div class="avatar">AU</div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content">
+                <div class="settings-tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-tab="general">General</button>
+                        <button class="tab-btn" data-tab="security">Security</button>
+                        <button class="tab-btn" data-tab="fees">Fees</button>
+                        <button class="tab-btn" data-tab="api">API</button>
+                    </div>
+                    
+                    <div class="tab-content active" id="general-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>General Settings</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="generalSettingsForm">
+                                    <div class="form-group">
+                                        <label for="siteName">Site Name</label>
+                                        <input type="text" id="siteName" name="siteName" placeholder="Enter site name" value="CryptoFlash">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="siteLogo">Site Logo</label>
+                                        <div class="file-upload">
+                                            <input type="file" id="siteLogo" name="siteLogo" accept="image/*">
+                                            <label for="siteLogo" class="btn btn-outline">
+                                                <i class="fas fa-upload"></i> Upload Logo
+                                            </label>
+                                            <span id="logoFileName">No file selected</span>
+                                        </div>
+                                        <div class="logo-preview">
+                                            <img src="../assets/images/logo.png" alt="Current Logo" width="100">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="siteTheme">Theme</label>
+                                        <select id="siteTheme" name="siteTheme">
+                                            <option value="light">Light</option>
+                                            <option value="dark">Dark</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="maintenanceMode">Maintenance Mode</label>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="maintenanceMode" name="maintenanceMode">
+                                            <label for="maintenanceMode"></label>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Save Settings</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="security-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Security Settings</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="securitySettingsForm">
+                                    <div class="form-group">
+                                        <label for="admin2fa">Admin Two-Factor Authentication</label>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="admin2fa" name="admin2fa" checked>
+                                            <label for="admin2fa"></label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="loginAttempts">Max Login Attempts</label>
+                                        <input type="number" id="loginAttempts" name="loginAttempts" min="1" max="10" value="5">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ipWhitelist">IP Whitelist</label>
+                                        <textarea id="ipWhitelist" name="ipWhitelist" placeholder="Enter allowed IP addresses (one per line)"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sessionTimeout">Session Timeout (minutes)</label>
+                                        <input type="number" id="sessionTimeout" name="sessionTimeout" min="5" max="1440" value="30">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Save Settings</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="fees-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Fee Settings</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="feeSettingsForm">
+                                    <div class="form-group">
+                                        <label for="depositFee">Deposit Fee (%)</label>
+                                        <input type="number" id="depositFee" name="depositFee" min="0" max="10" step="0.01" value="0.5">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="withdrawalFee">Withdrawal Fee (%)</label>
+                                        <input type="number" id="withdrawalFee" name="withdrawalFee" min="0" max="10" step="0.01" value="1.0">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tradeFee">Trade Fee (%)</label>
+                                        <input type="number" id="tradeFee" name="tradeFee" min="0" max="5" step="0.01" value="0.25">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="minWithdrawal">Minimum Withdrawal (USD)</label>
+                                        <input type="number" id="minWithdrawal" name="minWithdrawal" min="0" step="0.01" value="10.00">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Save Settings</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="api-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>API Settings</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="apiSettingsForm">
+                                    <div class="form-group">
+                                        <label for="apiEnabled">API Access</label>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="apiEnabled" name="apiEnabled">
+                                            <label for="apiEnabled"></label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="apiKey">API Key</label>
+                                        <div class="input-with-button">
+                                            <input type="text" id="apiKey" name="apiKey" placeholder="Generate API key" readonly value="sk_test_51Jf...">
+                                            <button type="button" class="btn btn-outline" id="generateApiKey">
+                                                <i class="fas fa-sync-alt"></i> Generate
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="apiPermissions">API Permissions</label>
+                                        <div class="checkbox-group">
+                                            <input type="checkbox" id="apiRead" name="apiRead" checked>
+                                            <label for="apiRead">Read</label>
+                                        </div>
+                                        <div class="checkbox-group">
+                                            <input type="checkbox" id="apiWrite" name="apiWrite">
+                                            <label for="apiWrite">Write</label>
+                                        </div>
+                                        <div class="checkbox-group">
+                                            <input type="checkbox" id="apiTrade" name="apiTrade">
+                                            <label for="apiTrade">Trade</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="apiWhitelist">IP Whitelist</label>
+                                        <textarea id="apiWhitelist" name="apiWhitelist" placeholder="Enter allowed IP addresses for API (one per line)"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Save Settings</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

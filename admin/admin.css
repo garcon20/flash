@@ -1,0 +1,338 @@
+.admin-dashboard .sidebar {
+    background-color: #1a1a2e;
+}
+
+.admin-dashboard .sidebar-nav li.active a {
+    border-left-color: #e94560;
+}
+
+.admin-dashboard .card-header i {
+    color: #e94560;
+}
+
+.admin-dashboard .text-success {
+    color: var(--success);
+}
+
+.admin-dashboard .text-danger {
+    color: var(--danger);
+}
+
+.admin-dashboard table th {
+    background-color: #1a1a2e;
+}
+
+.admin-dashboard .btn-approve {
+    background-color: var(--success);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.admin-dashboard .btn-reject {
+    background-color: var(--danger);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.admin-dashboard .action-buttons {
+    display: flex;
+    gap: 5px;
+}/* Admin Dashboard Specific Styles */
+.admin-dashboard .sidebar {
+    background-color: #1a1a2e;
+}
+
+.admin-dashboard .sidebar-nav li.active a {
+    border-left-color: #e94560;
+}
+
+.admin-dashboard .card-header i {
+    color: #e94560;
+}
+
+.admin-dashboard .text-success {
+    color: var(--success);
+}
+
+.admin-dashboard .text-danger {
+    color: var(--danger);
+}
+
+.admin-dashboard .text-warning {
+    color: var(--warning);
+}
+
+.admin-dashboard table th {
+    background-color: #1a1a2e;
+}
+
+/* Buttons */
+.admin-dashboard .btn-approve {
+    background-color: var(--success);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    border: none;
+    cursor: pointer;
+}
+
+.admin-dashboard .btn-reject {
+    background-color: var(--danger);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    border: none;
+    cursor: pointer;
+}
+
+.admin-dashboard .btn-view {
+    background-color: var(--secondary);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    border: none;
+    cursor: pointer;
+}
+
+.admin-dashboard .action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Filter Controls */
+.admin-dashboard .transaction-filters,
+.admin-dashboard .user-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.admin-dashboard .filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.admin-dashboard .filter-group label {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.admin-dashboard .search-box {
+    position: relative;
+}
+
+.admin-dashboard .search-box input {
+    padding: 0.5rem 1rem 0.5rem 2rem;
+    border: 1px solid var(--light-gray);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.admin-dashboard .search-box i {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gray);
+    font-size: 0.875rem;
+}
+
+/* Pagination */
+.admin-dashboard .table-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.admin-dashboard .table-pagination button {
+    padding: 0.5rem 1rem;
+}
+
+.admin-dashboard #pageInfo,
+.admin-dashboard #adminPageInfo {
+    font-size: 0.875rem;
+    color: var(--dark-gray);
+}
+
+/* Settings Page */
+.admin-dashboard .settings-tabs {
+    margin-top: 1rem;
+}
+
+.admin-dashboard .tab-buttons {
+    display: flex;
+    border-bottom: 1px solid var(--light-gray);
+    margin-bottom: 1.5rem;
+}
+
+.admin-dashboard .tab-btn {
+    padding: 0.75rem 1.5rem;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--dark-gray);
+    transition: all 0.3s;
+}
+
+.admin-dashboard .tab-btn.active {
+    color: var(--primary);
+    border-bottom-color: #e94560;
+}
+
+.admin-dashboard .tab-content {
+    display: none;
+}
+
+.admin-dashboard .tab-content.active {
+    display: block;
+}
+
+.admin-dashboard .toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.admin-dashboard .toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.admin-dashboard .toggle-switch label {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.admin-dashboard .toggle-switch label:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.admin-dashboard .toggle-switch input:checked + label {
+    background-color: #e94560;
+}
+
+.admin-dashboard .toggle-switch input:checked + label:before {
+    transform: translateX(26px);
+}
+
+.admin-dashboard .file-upload {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.admin-dashboard .file-upload input[type="file"] {
+    display: none;
+}
+
+.admin-dashboard .logo-preview {
+    margin-top: 1rem;
+}
+
+.admin-dashboard .logo-preview img {
+    border: 1px solid var(--light-gray);
+    border-radius: 0.25rem;
+}
+
+.admin-dashboard .input-with-button {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.admin-dashboard .input-with-button input {
+    flex: 1;
+}
+
+.admin-dashboard textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--light-gray);
+    border-radius: 0.5rem;
+    min-height: 100px;
+    font-family: inherit;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .admin-dashboard .transaction-filters {
+        flex-wrap: wrap;
+    }
+    
+    .admin-dashboard .filter-group {
+        flex: 1 0 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-dashboard .action-buttons {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    
+    .admin-dashboard .btn-approve,
+    .admin-dashboard .btn-reject,
+    .admin-dashboard .btn-view {
+        width: 100%;
+    }
+    
+    .admin-dashboard .tab-buttons {
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+    }
+    
+    .admin-dashboard .tab-btn {
+        white-space: nowrap;
+    }
+} 
+
+@media (max-width: 576px) {
+    .admin-dashboard .user-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .admin-dashboard .search-box {
+        width: 100%;
+    }
+    
+    .admin-dashboard .search-box input {
+        width: 100%;
+    }
+    
+    .admin-dashboard .table-pagination {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}

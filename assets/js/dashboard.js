@@ -26,11 +26,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // User data from authentication
     const currentUser = JSON.parse(localStorage.getItem('cryptoUser')) || {
-        name: 'shadrack Arhin',
+        name: 'Robert Stone ',
         balances: {
-            BTC: 0.054321,
-            ETH: 1.234567,
-            USDT: 1250.50
+            BTC: 0.00,
+            ETH: 10.34,
+            USDT: 0.00
         }
     };
     

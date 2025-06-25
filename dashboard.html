@@ -21,7 +21,7 @@
             </div>
             <div class="header-right">
                 <div class="user-profile">
-                    <span class="username">Shadrack Arhin</span>
+                    <span class="username">Robert Stone</span>
                     <img src="assets/images/b33dda1ac49df7ba072109e91ca304b8.jpg" alt="User" width="36" height="36">
                 </div>
                 <button id="logoutBtn" class="btn btn-outline btn-sm">Logout</button>
@@ -32,7 +32,7 @@
         <main class="dashboard-main">
             <!-- Balance Overview -->
             <section class="balance-overview">
-                <h2>Your Portfolio</h2>
+                <h2>Your Wallet</h2>
                 <div class="balance-cards">
                     
                     <div class="balance-card">
@@ -41,12 +41,12 @@
                             <span>Ethereum</span>
                         </div>
                         <div class="balance-amount">
-                            <span class="amount">1.234567</span>
+                            <span class="amount">10.34</span>
                             <span class="currency">ETH</span>
                         </div>
                         <div class="balance-value">
-                            <span class="value">$2,345.67</span>
-                            <span class="change negative">-1.2%</span>
+                            <span class="value">$25,005.95</span>
+                            <span class="change positive">+1.2%</span>
                         </div>
                     </div>
                     
@@ -56,12 +56,12 @@
                             <span>Bitcoin</span>
                         </div>
                         <div class="balance-amount">
-                            <span class="amount">0.054321</span>
+                            <span class="amount">0.00</span>
                             <span class="currency">BTC</span>
                         </div>
                         <div class="balance-value">
-                            <span class="value">$1,832.45</span>
-                            <span class="change positive">+2.3%</span>
+                            <span class="value">$0.00</span>
+                            <span class="change negative">-2.3%</span>
                         </div>
                     </div>
                     
@@ -71,11 +71,11 @@
                             <span>Tether</span>
                         </div>
                         <div class="balance-amount">
-                            <span class="amount">1250.50</span>
+                            <span class="amount">0.00</span>
                             <span class="currency">USDT</span>
                         </div>
                         <div class="balance-value">
-                            <span class="value">$1,250.50</span>
+                            <span class="value">$0.00</span>
                             <span class="change neutral">0.0%</span>
                         </div>
                     </div>
@@ -400,9 +400,9 @@ const transactionModal = document.getElementById('transactionModal');
             
             // Wallet balances (mock data)
             const walletBalances = {
-                BTC: 0.054321,
-                ETH: 1.234567,
-                USDT: 1250.50
+                BTC: 0.00,
+                ETH: 10.34,
+                USDT: 0.00
             };
             
             // Network fees (mock data)

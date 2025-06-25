@@ -34,20 +34,6 @@
             <section class="balance-overview">
                 <h2>Your Portfolio</h2>
                 <div class="balance-cards">
-                    <div class="balance-card">
-                        <div class="crypto-info">
-                            <img src="assets/images/8ba86ebd0f990d16e3d30eabbc65d114.jpg" alt="Bitcoin" width="24" height="24">
-                            <span>Bitcoin</span>
-                        </div>
-                        <div class="balance-amount">
-                            <span class="amount">0.054321</span>
-                            <span class="currency">BTC</span>
-                        </div>
-                        <div class="balance-value">
-                            <span class="value">$1,832.45</span>
-                            <span class="change positive">+2.3%</span>
-                        </div>
-                    </div>
                     
                     <div class="balance-card">
                         <div class="crypto-info">
@@ -61,6 +47,21 @@
                         <div class="balance-value">
                             <span class="value">$2,345.67</span>
                             <span class="change negative">-1.2%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="balance-card">
+                        <div class="crypto-info">
+                            <img src="assets/images/8ba86ebd0f990d16e3d30eabbc65d114.jpg" alt="Bitcoin" width="24" height="24">
+                            <span>Bitcoin</span>
+                        </div>
+                        <div class="balance-amount">
+                            <span class="amount">0.054321</span>
+                            <span class="currency">BTC</span>
+                        </div>
+                        <div class="balance-value">
+                            <span class="value">$1,832.45</span>
+                            <span class="change positive">+2.3%</span>
                         </div>
                     </div>
                     
@@ -93,14 +94,150 @@
 
             <!-- Recent Transactions -->
             <section class="recent-transactions">
-                <h2>Recent Transactions</h2>
-                <div class="transactions-list">
-                    <div class="empty-state">
-                        <i class="fas fa-exchange-alt"></i>
-                        <p>No transactions yet</p>
-                    </div>
+    <h2>Transaction History</h2>
+    <div class="transactions-list">
+        <div class="transaction-card confirmed">
+            <div class="transaction-icon">
+                <i class="fas fa-exchange-alt"></i>
+            </div>
+            <div class="transaction-details">
+                <div class="transaction-header">
+                    <span class="transaction-type">Transfer</span>
+                    <span class="transaction-status confirmed">Confirmed</span>
                 </div>
-            </section>
+                <div class="transaction-body">
+                    <p class="transaction-amount">18,000 USD</p>
+                    <p class="transaction-meta">To Ethereum Wallet</p>
+                </div>
+                <div class="transaction-footer">
+                    <span class="transaction-date">January 22, 2025</span>
+                    <span class="transaction-id">#TX-4892-EF67</span>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+</section>
+
+<style>
+.recent-transactions {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.recent-transactions h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.transaction-card {
+    display: flex;
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: transform 0.2s;
+    border-left: 4px solid;
+}
+
+.transaction-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+.transaction-card.confirmed {
+    border-left-color: #2ecc71;
+}
+
+.transaction-card.pending {
+    border-left-color: #f39c12;
+}
+
+.transaction-card.completed {
+    border-left-color: #3498db;
+}
+
+.transaction-icon {
+    font-size: 1.5rem;
+    color: #7f8c8d;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.transaction-details {
+    flex: 1;
+}
+
+.transaction-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.transaction-type {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.transaction-status {
+    font-size: 0.8rem;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.transaction-status.confirmed {
+    background-color: #e8f8f0;
+    color: #2ecc71;
+}
+
+.transaction-status.pending {
+    background-color: #fef5e6;
+    color: #f39c12;
+}
+
+.transaction-status.completed {
+    background-color: #eaf2f8;
+    color: #3498db;
+}
+
+.transaction-body {
+    margin-bottom: 10px;
+}
+
+.transaction-amount {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 5px 0;
+}
+
+.transaction-meta {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin: 5px 0;
+}
+
+.transaction-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #95a5a6;
+}
+
+.transaction-id {
+    font-family: 'Courier New', monospace;
+}
+</style>
         </main>
 
         <!-- Transaction Modals -->
